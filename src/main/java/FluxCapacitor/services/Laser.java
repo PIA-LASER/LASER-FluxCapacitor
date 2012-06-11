@@ -9,15 +9,15 @@ import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.mapred.ClusterStatus;
 import org.apache.hadoop.mapred.JobClient;
 import org.apache.hadoop.mapred.JobConf;
+import org.codehaus.jettison.json.JSONException;
 
-import javax.annotation.processing.SupportedSourceVersion;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.util.HashMap;
+
 
 @Path("laser")
 public class Laser {
@@ -62,7 +62,7 @@ public class Laser {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("clusterstatus")
-    public String getClusterStatus(@Context HttpServletResponse servletResponse) throws IOException{
+    public String getClusterStatus(@Context HttpServletResponse servletResponse) throws IOException, JSONException {
         FluxConfiguration flux = FluxConfiguration.getInstance();
 
         if (!flux.hasConfig("jobtracker")) {
@@ -78,7 +78,7 @@ public class Laser {
             JobClient jobClient = new JobClient(jobConf);
             cluster = jobClient.getClusterStatus();
         } catch (IOException e) {
-                servletResponse.sendError(500);
+                servletResponse.setStatus(500);
                 return "";
         }
 
@@ -87,7 +87,7 @@ public class Laser {
     }
 
     @GET
-    @Produces
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("datastatus")
     public String getDataStatus(@Context HttpServletResponse servletResponse) throws IOException {
         FluxConfiguration flux = FluxConfiguration.getInstance();
@@ -109,8 +109,8 @@ public class Laser {
                 results.put("inputSize", totalInputSize);
             }
         } catch (IOException e) {
-            servletResponse.sendError(500);
-            return "";
+            servletResponse.setStatus(500);
+            return new Gson().toJson("");
         }
 
         long outputSize = 0;
@@ -129,8 +129,8 @@ public class Laser {
                 throw new IOException();
             }
         } catch (IOException e) {
-            servletResponse.sendError(500);
-            return "";
+            servletResponse.setStatus(500);
+            return new Gson().toJson("");
 
         } finally {
             results.put("outputSize", outputSize);

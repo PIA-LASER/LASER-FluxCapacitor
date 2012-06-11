@@ -15,6 +15,13 @@
         <jettyVersion>7.2.0.v20101020</jettyVersion>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>codehaus</id>
+            <url>http://repository.codehaus.org/org/codehaus</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -42,6 +49,11 @@
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-servlet</artifactId>
             <version>${jettyVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-json</artifactId>
+            <version>1.12</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -78,6 +90,11 @@
             <artifactId>LASER-WITHDEP</artifactId>
             <version>1.0</version>
         </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>1.9.7</version>
+            </dependency>
     </dependencies>
 
     <build>

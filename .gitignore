@@ -1,1 +1,7 @@
 .DS_Store
+.idea/*
+.idea
+target/
+target
+FluxCapacitor.iml
+
