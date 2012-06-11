@@ -1,0 +1,4 @@
+#!/bin/bash
+
+java -jar ./target/FluxCapacitor-1.0-jar-with-dependencies.jar localhost:54311 localhost:54310
+

@@ -4,13 +4,108 @@
 <head>
     <title>FluxCapacitor</title>
     <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/laser.css">
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.2.js"></script>
+    <script type="text/javascript" src="js/laser.js"></script>
 </head>
 <body>
 <div class="container">
-    <div class="span10">
-        <h1>FluxCapacitor</h1>
-        <h2>LASER web interface</h2>
+    <div class="row">
+        <div class="span10">
+            <h1>FluxCapacitor</h1>
+
+            <h2>LASER web interface</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span4">
+            <h3>Control</h3>
+        </div>
+        <div class="span5">
+            <button class="btn" id="startRecommendationBtn">Start recommendation</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span4">
+            <h3>Configuration</h3>
+        </div>
+        <div class="span5">
+            <form id="jobConfigForm" class="form-horizontal" method="post" action="laser/startrecommendation">
+                <div class="control-group">
+                    <label class="control-label" for="nameNode">Name Node</label>
+                    <div class="controls">
+                        <input type="text" class="input-large" name="nameNode" id="nameNode" value="hdfs://localhost:54310/">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="jobTracker">Job Tracker</label>
+                    <div class="controls">
+                        <input type="text" class="input-large" name="jobTracker" id="jobTracker" value="localhost:54311">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="numSim">Number of similarities</label>
+                    <div class="controls">
+                        <input type="text" class="input-large" name="numSim" id="numSim" value="100">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="simType">Similarity type</label>
+                    <div class="controls">
+                        <select name="simType" id="simType">
+                            <option>CosineSimilarity</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span4">
+            <h3>Statistics</h3>
+        </div>
+        <div class="span5">
+            <table id="clusterStats" class="table table-striped table-bordered">
+                <tbody>
+                <tr id="totalMap">
+                    <td>Total Map Slots</td>
+                </tr>
+                <tr id="usedMap">
+                    <td>Used Map Slots</td>
+                </tr>
+                <tr id="totalReduce">
+                    <td>Total Reduce Slots</td>
+                </tr>
+                <tr id="usedReduce">
+                    <td>Used Reduce Slots</td>
+                </tr>
+                <tr id="totalActiveTrackers">
+                    <td>Total Task Trackers</td>
+                </tr>
+                <tr id="curActiveTrackers">
+                    <td>Active Task Trackers</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span4">
+            <h3>Data</h3>
+        </div>
+        <div class="span5">
+            <table id="dataStats" class="table table-striped table-bordered">
+                <tbody>
+                <tr id="totalInput">
+                    <td>Input Data:</td>
+                </tr>
+                <tr id="totalOutput">
+                    <td>Output Data:</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 </body>
