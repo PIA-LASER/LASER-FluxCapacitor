@@ -23,16 +23,16 @@ import java.util.HashMap;
 public class Laser {
 
     private class LaserThread extends Thread {
-        private String[] args;
+        private HashMap<String, String> args;
 
-        public LaserThread(String[] args) {
+        public LaserThread(HashMap<String, String> args) {
             this.args = args;
         }
 
         @Override
         public void run() {
             try {
-                App.main(args);
+                App.run(new App(), args);
             } catch (Exception e) {
                 System.err.print("Running recommendation job failed.");
                 e.printStackTrace();
@@ -47,9 +47,34 @@ public class Laser {
                                     @FormParam("jobTracker") String jobTracker,
                                     @FormParam("simType") String simType,
                                     @FormParam("numSim") String numSim,
+                                    @FormParam("redis") String redisHost,
+                                    @FormParam("outputMode") String outputMode,
+                                    @FormParam("iosortfactor") String ioSortFactor,
+                                    @FormParam("iosortbuf") String ioSortMb,
                                     @Context HttpServletResponse servletResponse) throws IOException {
 
-        final String[] args = new String[]{nameNode, jobTracker, simType, numSim};
+        HashMap<String, String> args = new HashMap<String, String>();
+
+        args.put("nameNode", nameNode);
+        args.put("jobTracker", jobTracker);
+        args.put("simType", simType);
+        args.put("numSim", numSim);
+        args.put("redisHost", redisHost);
+
+        if(outputMode.equals("redis")) {
+            args.put("debug", "false");
+            args.put("outputBoth", "false");
+        } else if(outputMode.equals("output_plaintext")) {
+            args.put("debug", "true");
+            args.put("outputBoth", "false");
+        } else if(outputMode.equals("both")) {
+            args.put("debug", "true");
+            args.put("outputBoth", "true");
+        }
+
+
+        args.put("io.sort.mb", ioSortMb);
+        args.put("io.sort.factor", ioSortFactor);
 
         LaserThread lt = new LaserThread(args);
 

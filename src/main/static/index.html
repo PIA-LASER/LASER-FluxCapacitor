@@ -14,7 +14,6 @@
     <div class="row">
         <div class="span10">
             <h1>FluxCapacitor</h1>
-
             <h2>LASER web interface</h2>
         </div>
     </div>
@@ -23,7 +22,7 @@
             <h3>Control</h3>
         </div>
         <div class="span5">
-            <button class="btn" id="startRecommendationBtn">Start recommendation</button>
+            <button class="btn span5" id="startRecommendationBtn">Start recommendation</button>
         </div>
     </div>
     <div class="row">
@@ -45,17 +44,52 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="numSim">Number of similarities</label>
+                    <label class="control-label" for="redis">Redis Host</label>
+                    <div class="controls">
+                        <input type="text" class="input-large" name="redis" id="redis" value="localhost">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="numSim">Number Of Similarities</label>
                     <div class="controls">
                         <input type="text" class="input-large" name="numSim" id="numSim" value="100">
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="simType">Similarity type</label>
+                    <label class="control-label" for="simType">Similarity Type</label>
                     <div class="controls">
                         <select name="simType" id="simType">
                             <option>CosineSimilarity</option>
                         </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="simType">Result Storage</label>
+                    <div class="controls">
+                        <label class="radio">
+                            <input type="radio" name="outputMode" value="redis" checked>
+                            redis
+                        </label>
+                        <label class="radio">
+                            <input type="radio" name="outputMode" value="output_plaintext">
+                            plain text
+                        </label>
+                        <label class="radio">
+                            <input type="radio" name="outputMode" value="both">
+                            both
+                        </label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="iosortbuf">Map Output Buffer Size (per map slot)</label>
+                    <div class="controls">
+                        <input type="text" class="input-large" name="iosortbuf" id="iosortbuf" value="200">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="iosortfactor">Map Output Sort Workers</label>
+                    <div class="controls">
+                        <input type="text" class="input-large" name="iosortfactor" id="iosortfactor" value="20">
                     </div>
                 </div>
             </form>

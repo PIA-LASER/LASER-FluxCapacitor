@@ -1,2 +1,2 @@
 #!/bin/bash
-mvn exec:java
+mvn clean compile assembly:single exec:java
