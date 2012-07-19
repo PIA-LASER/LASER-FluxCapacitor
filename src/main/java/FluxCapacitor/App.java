@@ -18,8 +18,8 @@ public class App
 {
     private static void handleConfig(String[] args) throws IOException{
         FluxConfiguration fluxConfiguration = FluxConfiguration.getInstance();
-        fluxConfiguration.set("jobtracker","localhost:54311");
-        fluxConfiguration.set("hdfs","hdfs://localhost:54310/");
+        fluxConfiguration.set("jobtracker","master:54311");
+        fluxConfiguration.set("hdfs","hdfs://master:54310/");
     }
 
     public static void main(String[] args) throws Exception
